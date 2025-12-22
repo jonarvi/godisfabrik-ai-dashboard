@@ -1,0 +1,60 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: candy_sql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=CandyFactory2025!
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    networks:
+      - candy-net
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P CandyFactory2025! -Q 'SELECT 1' -C || exit 1"]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: candy_ai
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_storage:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - candy-net
+
+  app:
+    build: .
+    container_name: candy_frontend
+    # OBS: network_mode: host gör att vi inte behöver "ports" sektionen
+    network_mode: "host" 
+    depends_on:
+      mssql:
+        condition: service_started
+      ollama:
+        condition: service_started
+    environment:
+      # Nu när vi kör host mode hittar vi tjänsterna på localhost
+      - DB_SERVER=127.0.0.1
+      - DB_USER=sa
+      - DB_PASSWORD=CandyFactory2025!
+      - DB_NAME=CandyDB
+      - OLLAMA_HOST=http://127.0.0.1:11434
+    volumes:
+      - ./app:/app
+
+volumes:
+  ollama_storage:
+
+networks:
+  candy-net:

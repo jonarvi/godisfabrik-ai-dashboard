@@ -70,7 +70,7 @@ Detta projekt är licensierat under [MIT-licensen](https://opensource.org/licens
 ![OEE-dashboard](screenshots/oee.png)
 ![Larm rapport](screenshots/larm.png)
 ![Chat](screenshots/chat.png)
-![Maskin 1 översikt](screenshots/maskin_1_1 översikt.png)
-![Maskin chat](screenshots/maskin_1_1 chat.png)
+![Maskin 1 översikt](screenshots/maskin_1_1_översikt.png)
+![Maskin chat](screenshots/maskin_1_1_chat.png)
 
 ---

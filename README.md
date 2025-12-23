@@ -64,4 +64,13 @@ För att köra denna applikation på din egen dator eller server, följ dessa st
 ## 📜 Licens
 Detta projekt är licensierat under [MIT-licensen](https://opensource.org/licenses/MIT) - se `LICENSE`-filen för mer detaljer.
 
+## 📸 Skärmdumpar
+
+![Huvudskärmen på Godisfabrik 4.0](screenshots/sida1.png)
+![OEE-dashboard](screenshots/oee.png)
+![Larm rapport](screenshots/larm.png)
+![Chat](screenshots/chat.png)
+![Maskin 1 översikt](screenshots/maskin_1_1 översikt.png)
+![Maskin chat](screenshots/maskin_1_1 chat.png)
+
 ---
